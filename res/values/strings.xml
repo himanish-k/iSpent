@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">iSpent</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_add_entry">Add Entry</string>
+    <string name="action_delete_all_entries">Delete All Entries</string>
+    <string name="action_total">Total</string>
+    <string name="button_add_entry">Add Entry</string>
+    
+    <string name="payment">I spent </string>
+    <string name="hint_payment">$00.00</string>
+    <string name="payee">At </string>
+    <string name="hint_payee">some store/bill</string>
+    <string name="date">On </string>
+    <string name="hint_date"></string>
+    <string name="button_create">Create Entry</string>
+    <string name="title_activity_create_entry">Create Entry</string>
+
+</resources>
