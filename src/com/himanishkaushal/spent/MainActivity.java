@@ -20,6 +20,7 @@ public class MainActivity extends ActionBarActivity {
 	private EntrySource source;
 	private EntryAdapter adapter;
 	private ListView listView;
+	private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +28,10 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         
         source = new EntrySource(this);
-        source.open();
-        
-        Cursor cursor = source.fetchAllEntries();
-        
-        adapter = new EntryAdapter(this, cursor);
-        					   
         listView = (ListView) findViewById(R.id.list);
-        listView.setAdapter(adapter);
-       
+        refreshList();
     }
-
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -63,6 +56,9 @@ public class MainActivity extends ActionBarActivity {
         	case R.id.action_total:
         		showTotal();
         		return true;
+        	/* case R.id.action_calendar:
+        		showCalendarView();
+        		return true; */
         }
         return super.onOptionsItemSelected(item);
     }
@@ -77,29 +73,49 @@ public class MainActivity extends ActionBarActivity {
         	String payee = data.getStringExtra(EXTRA_ENTRY_PAYEE);
         	double payment = data.getDoubleExtra(EXTRA_ENTRY_PAYMENT, 0.00);
         	
+        	source.open();
         	source.insertEntry(year, month, day, payee, payment);
+        	source.close();
         	adapter.notifyDataSetChanged();
+        	refreshList();
         	// listView.invalidateViews();
         	
         	Toast.makeText(this, "New entry created.", Toast.LENGTH_SHORT).show();
         }
     } 
     
+    public void refreshList() {
+    	source.open();
+    	cursor = source.fetchAllEntriesByDate();
+    	source.close();
+        adapter = new EntryAdapter(this, cursor);
+        listView.setAdapter(adapter);
+    }
+    
     public void addEntry() {
     	
     	startActivityForResult(new Intent(this, CreateEntryActivity.class), 1);
+    }
+    
+    public void deleteEntry() {
+    	refreshList();
     }
     
     public void deleteAllEntries() {
     	
     	//DialogFragment alert = new DialogFragment();
     	//alert.show(getFragmentManager(), "Are you sure ?");
+    	source.open();
     	source.deleteAllEntries();
+    	source.close();
+    	refreshList();
     }
     
     public void showTotal() {
     	
+    	source.open();
     	Cursor cursor = source.fetchAllEntries();
+    	source.close();
     	double total = 0;
    
     	if( cursor.moveToFirst()) {
@@ -110,6 +126,11 @@ public class MainActivity extends ActionBarActivity {
     	
     	cursor.close();
     	Toast.makeText(this, "Your total is $" + total, Toast.LENGTH_LONG).show();
+    }
+    
+    public void showCalendarView() {
+    	
+    	startActivity(new Intent(this, CalendarActivity.class));
     }
      
 }

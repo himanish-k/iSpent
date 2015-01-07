@@ -40,9 +40,10 @@ public class EntrySource {
 		return database.insert(DatabaseHelper.TABLE_ENTRIES, null, newEntry);
 	}
 	
-	public void insertEntriesAtStart() {
-		
-		insertEntry(2014, 03, 04, "Store", 45);
+	public boolean deleteEntry(int id) {
+		String where = DatabaseHelper.COLUMN_ID + "=" + id;
+		int deleted = database.delete(DatabaseHelper.TABLE_ENTRIES, where, null);
+		return deleted > 0;
 	}
 	
 	public boolean deleteAllEntries() {
@@ -62,6 +63,45 @@ public class EntrySource {
 		return cursor;
 	}
 	
+	/* public Cursor query (String table, 
+	 * 						String[] columns, 
+	 * 						String selection, 
+	 * 						String[] selectionArgs, 
+	 * 						String groupBy, 
+	 * 						String having, 
+	 * 						String orderBy)
+	 * 
+	 * returns a cursor that contains all the entries ordered 
+	 * from the latest date on the top
+	 */
+	public Cursor fetchAllEntriesByDate() {
+		String orderBy = DatabaseHelper.COLUMN_YEAR + 
+						 " DESC" +
+						 DatabaseHelper.COMMA + 
+						 DatabaseHelper.COLUMN_MONTH + 
+						 " DESC" +
+						 DatabaseHelper.COMMA + 
+						 DatabaseHelper.COLUMN_DAY + 
+						 " DESC";
+		Cursor cursor = database.query(DatabaseHelper.TABLE_ENTRIES, allColumns, null, null, null, null, orderBy);
+		
+		if(cursor != null) {
+			cursor.moveToFirst();
+		}
+		
+		return cursor;
+	}
+	
+	/* public Cursor query (String table, 
+	 * 						String[] columns, 
+	 * 						String selection, 
+	 * 						String[] selectionArgs, 
+	 * 						String groupBy, 
+	 * 						String having, 
+	 * 						String orderBy)
+	 * 
+	 * returns all the entries for the specified month
+	 */
 	public Cursor fetchAllEntriesForMonth(int month) {
 		
 		String selection = DatabaseHelper.COLUMN_MONTH + "=" + month;

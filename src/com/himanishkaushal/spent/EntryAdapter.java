@@ -5,8 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class EntryAdapter extends CursorAdapter {
@@ -56,6 +59,7 @@ public class EntryAdapter extends CursorAdapter {
 
 		TextView date, payee, payment;
 		
+		int id = cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(0)));
 		int yearValue = cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(1)));
         int monthValue = cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(2)));
         int dayValue = cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(3)));
@@ -68,8 +72,34 @@ public class EntryAdapter extends CursorAdapter {
         
         double paymentValue = cursor.getDouble(cursor.getColumnIndex(cursor.getColumnName(5)));
         payment.setText(new String("$" + paymentValue));
+        
+        Button deleteButton = (Button) view.findViewById(R.id.button_delete);
+        deleteButton.setOnClickListener(new DeleteButtonListener(context, id));
+		
+	}
+	
+	private class DeleteButtonListener implements OnClickListener {
+		
+		EntrySource source;
+		int id;
+		Context context;
+		
+		public DeleteButtonListener(Context context, int id) {
+			this.context = context;
+			source = new EntrySource(context);
+			this.id = id;
+		}
+		@Override
+		public void onClick(View v) {
+			
+			
+			source.open();
+			source.deleteEntry(id);
+			source.close();
+			
+			((MainActivity) context).refreshList();
+		}
 		
 	}
 
-	 
 }   

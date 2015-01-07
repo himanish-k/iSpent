@@ -7,7 +7,6 @@
     <string name="action_delete_all_entries">Delete All Entries</string>
     <string name="action_total">Total</string>
     <string name="button_add_entry">Add Entry</string>
-    
     <string name="payment">I spent </string>
     <string name="hint_payment">$00.00</string>
     <string name="payee">At </string>
@@ -16,5 +15,14 @@
     <string name="hint_date"></string>
     <string name="button_create">Create Entry</string>
     <string name="title_activity_create_entry">Create Entry</string>
+    <string name="title_activity_calendar">Calendar</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_calendar">Calendar View</string>
+    
+    <string name="calendar_prev_month">Prev</string>
+    <string name="calendar_next_month">Next</string>
+    <!--<string name=""></string>-->
+    
+    <string name="back">&lt;&#8211;</string>
 
 </resources>

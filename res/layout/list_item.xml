@@ -1,35 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal" >
-    
-    <TextView 
-        android:id="@+id/list_item_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/date" 
-        android:textSize="15sp"        
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true" />
-       
-    <TextView 
-        android:id="@+id/list_item_payee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/payee"
-        android:textSize="15sp" 
-        android:layout_below="@id/list_item_date"
-    	android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
-    
-    <TextView 
-        android:id="@+id/list_item_payment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/payment"
-        android:textSize="25sp" 
-        android:layout_alignParentRight="true" />
-    	
-
-</RelativeLayout>
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+	<RelativeLayout 
+	    android:id="@+id/entry"
+	    android:layout_width="0dp"
+	    android:layout_height="match_parent"
+	    android:orientation="horizontal" 
+	    android:layout_weight="1"
+	    >
+	    
+	    <TextView 
+	        android:id="@+id/list_item_date"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/date" 
+	        android:textSize="15sp"        
+	        android:layout_alignParentTop="true"
+	        android:layout_alignParentLeft="true" />
+	       
+	    <TextView 
+	        android:id="@+id/list_item_payee"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/payee"
+	        android:textSize="15sp" 
+	        android:layout_below="@id/list_item_date"
+	    	android:layout_alignParentBottom="true"
+	        android:layout_alignParentLeft="true" />
+	    
+	    <TextView 
+	        android:id="@+id/list_item_payment"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/payment"
+	        android:textSize="25sp" 
+	        android:layout_alignParentRight="true" />
+	    	
+	
+	</RelativeLayout>
+	
+	<Button 
+	    android:id="@+id/button_delete"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="DEL"
+	    android:textSize="14sp"
+	    />
+</LinearLayout>
