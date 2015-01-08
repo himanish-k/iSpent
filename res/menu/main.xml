@@ -18,6 +18,7 @@
     <item 
         android:id="@+id/action_add_entry" 
         android:orderInCategory="2" 
+        android:icon="@drawable/ic_action_new"
         android:title="@string/action_add_entry"
         app:showAsAction="ifRoom" />
     

@@ -7,9 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CursorAdapter;
-import android.widget.ListView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class EntryAdapter extends CursorAdapter {
@@ -73,7 +72,7 @@ public class EntryAdapter extends CursorAdapter {
         double paymentValue = cursor.getDouble(cursor.getColumnIndex(cursor.getColumnName(5)));
         payment.setText(new String("$" + paymentValue));
         
-        Button deleteButton = (Button) view.findViewById(R.id.button_delete);
+        ImageButton deleteButton = (ImageButton) view.findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(new DeleteButtonListener(context, id));
 		
 	}
